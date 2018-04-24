@@ -27,6 +27,7 @@
 </template>
 <script>
 import { mapState, mapGetters } from 'vuex'
+import { MessageBox } from 'mint-ui';
 import HomeFooter from "./homeFooter";
 export default {
   name: "shoppingCart",
@@ -94,7 +95,11 @@ export default {
       item.count++
     },
     del(item){
-      this.shoppingCartGoodsList.splice(this.shoppingCartGoodsList.indexOf(item),1)
+      MessageBox.confirm('确定删除此商品?').then(action => {
+        this.shoppingCartGoodsList.splice(this.shoppingCartGoodsList.indexOf(item),1)
+      },(msg)=>{
+        console.log(msg);
+      })
     }
   },
   components: { HomeFooter }
